@@ -1,0 +1,87 @@
+Employee(
+
+  SSN PRIMARY KEY,
+
+  Fname,
+
+  Lname,
+
+  BirthDate,
+
+  Gender,
+
+  DepartmentID FOREIGN KEY REFERENCES Department(DNUM),
+
+  SupervisorSSN FOREIGN KEY REFERENCES Employee(SSN)
+
+)
+
+Department(
+
+  DNUM PRIMARY KEY,
+
+  DName
+
+)
+
+DepartmentLocations(
+
+  DNUM FOREIGN KEY REFERENCES Department(DNUM),
+
+  Location,
+
+  PRIMARY KEY (DNUM, Location)
+
+)
+
+Project(
+
+  PNumber PRIMARY KEY,
+
+  PName,
+
+  Location,
+
+  City,
+
+  DepartmentID FOREIGN KEY REFERENCES Department(DNUM)
+
+)
+
+Dependent(
+
+  SSN FOREIGN KEY REFERENCES Employee(SSN),
+
+  DependentName,
+
+  Gender,
+
+  BirthDate,
+
+  PRIMARY KEY (SSN, DependentName)
+
+)
+
+WorksOn(
+
+  SSN FOREIGN KEY REFERENCES Employee(SSN),
+
+  PNumber FOREIGN KEY REFERENCES Project(PNumber),
+
+  WorkingHours,
+
+  PRIMARY KEY (SSN, PNumber)
+
+)
+
+Manages(
+
+  SSN FOREIGN KEY REFERENCES Employee(SSN),
+
+  DNUM FOREIGN KEY REFERENCES Department(DNUM),
+
+  HireDate,
+
+  PRIMARY KEY (SSN, DNUM)
+
+)
